@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: zuul-service
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      config:
+        enabled: true
+        prefix: config
+        defaultContext: apps
+        profileSeparator: '::'
+server:
+  port: 9090
+zuul:
+  prefix: /api
+  ignoreLocalService: false
+  sensitiveHeaders: Cookie,Set-Cookie
+  addProxyHeaders: false
+ribbon:
+  eureka:
+    enabled: false
+  consul:
+    enabled: true

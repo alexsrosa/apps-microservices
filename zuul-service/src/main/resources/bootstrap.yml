@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: zuul-service
+  cloud:
+    consul:
+      host: consul
+      port: 8500
+      config:
+        enabled: true
+        prefix: config
+        defaultContext: apps
+        profileSeparator: '::'

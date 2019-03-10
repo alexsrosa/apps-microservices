@@ -1,0 +1,44 @@
+version: '3.3'
+services:
+  consul:
+    image: "consul:latest" #"consul:1.4.3"
+    container_name: "consul"
+    hostname: "consul"
+    ports:
+      - "8300:8300"
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:53"
+    networks:
+      - production-network
+  cadastro-service:
+    build:
+      dockerfile: cadastro-service.dockerfile
+      context: .
+    image: alexsrosa/cadastro-service
+    container_name: cadastro-service-1
+    ports:
+      - "8080:8080"
+    networks:
+      - production-network
+    depends_on:
+      - "consul"
+    links:
+      - "consul:consul"
+  zuul-service:
+    build:
+      dockerfile: zuul-service.dockerfile
+      context: .
+    image: alexsrosa/zuul-service
+    container_name: zuul-service-1
+    ports:
+      - "9090:9090"
+    networks:
+      - production-network
+    depends_on:
+      - "consul"
+    links:
+      - "consul:consul"
+networks:
+  production-network:
+    driver: bridge
