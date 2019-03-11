@@ -22,5 +22,8 @@ Baixar todas as aplicações:
 docker-compose down
 ```
 
+## Access link to consul
+http://localhost:8500
+
 ## More information about API Rest
 http://localhost:9090/api/cadastro-service/swagger-ui.html
